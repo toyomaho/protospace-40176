@@ -51,6 +51,7 @@ class PrototypesController < ApplicationController
   def destroy
     if user_signed_in?
       @prototype = Prototype.find(params[:id])
+      @prototype.comments.destroy
       @prototype.destroy
       redirect_to root_path
     else
