@@ -36,7 +36,7 @@ class PrototypesController < ApplicationController
   def update
     prototype = Prototype.find(params[:id])
     if prototype.update(prototype_params)
-      redirect_to root_path
+      redirect_to action: :show
     else
       render :edit, status: :unprocessable_entity
     end
@@ -50,8 +50,8 @@ class PrototypesController < ApplicationController
 
   def destroy
     if user_signed_in?
-      prototype = Prototype.find(params[:id])
-      prototype.destroy
+      @prototype = Prototype.find(params[:id])
+      @prototype.destroy
       redirect_to root_path
     else
       redirect_to new_user_session_path
